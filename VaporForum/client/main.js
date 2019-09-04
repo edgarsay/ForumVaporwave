@@ -1,22 +1,50 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import {
+  Template
+} from 'meteor/templating';
+import {
+  Posts
+} from '../imports/api/collections.js';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+//template.templateName.helpers
+Template.body.helpers({
+  posts() {
+    return Posts.find({})
+  }
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+Template.post.events({
+  'click .delete-post':function(){
+    //padrão
+    event.preventDefault();
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+    //remove from collection
+    Posts.remove(this._id);
+
+    return false;
+  }
+})
+
+Template.add.events({
+  'submit .add-post':function(){
+    //padrão
+    event.preventDefault();
+
+    //pega o valor:
+    const target = event.target;
+    const textv = target.text.value;
+
+    //insert into collection
+    Posts.insert({
+      text : textv,
+      //date now
+      createdAt: new Date(),
+    })
+
+    //clear form 
+    target.text.value = "";
+
+    return false;
+  }
+})
