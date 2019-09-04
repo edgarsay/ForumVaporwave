@@ -7,6 +7,9 @@ import {
 import{
   Accounts
 } from 'meteor/accounts-base';
+import{
+  Meteor 
+} from 'meteor/meteor';
 
 
 //config accounts:
@@ -20,8 +23,14 @@ import './main.html';
 Template.body.helpers({
   posts() {
     return Posts.find({})
-  }
+  },
 });
+
+Template.post.helpers({
+  'myPost':function(idv){
+    return Meteor.userId() === idv;
+  },
+})
 
 Template.post.events({
   'click .delete-post':function(){
@@ -47,6 +56,8 @@ Template.add.events({
     //insert into collection
     Posts.insert({
       text : textv,
+      owner : Meteor.userId(),
+      ownerUsername : Meteor.user().username,
       //date now
       createdAt: new Date(),
     })
