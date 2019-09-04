@@ -4,6 +4,15 @@ import {
 import {
   Posts
 } from '../imports/api/collections.js';
+import{
+  Accounts
+} from 'meteor/accounts-base';
+
+
+//config accounts:
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_ONLY',
+})
 
 import './main.html';
 
