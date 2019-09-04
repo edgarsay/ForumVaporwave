@@ -5,7 +5,9 @@
 <body>
   <h1>Running</h1>
   {{>loginButtons}}
-  {{>add}}
+  {{#if currentUser}}
+    {{>add}}
+  {{/if}}
   <ul>
     {{#each posts}}
     {{>post}}
@@ -15,8 +17,10 @@
 
 <template name="post">
   <li>
-    {{text}}
-    <a href="#" class=" delete-post">delete</a>
+    {{text}} posted by {{ ownerUsername }}
+    {{#if myPost owner }}
+      <a href="#" class=" delete-post">delete</a>
+    {{/if}}
   </li>
 </template>
 
