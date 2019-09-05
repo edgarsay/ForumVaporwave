@@ -38,7 +38,7 @@ Template.post.events({
     event.preventDefault();
 
     //remove from collection
-    Posts.remove(this._id);
+    Meteor.call('posts.remove', this);
 
     return false;
   }
@@ -54,13 +54,7 @@ Template.add.events({
     const textv = target.text.value;
 
     //insert into collection
-    Posts.insert({
-      text : textv,
-      owner : Meteor.userId(),
-      ownerUsername : Meteor.user().username,
-      //date now
-      createdAt: new Date(),
-    })
+    Meteor.call('posts.insert', textv);
 
     //clear form 
     target.text.value = "";
