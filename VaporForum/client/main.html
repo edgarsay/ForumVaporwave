@@ -1,52 +1,33 @@
 <head>
   <title>VaporForum</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
 </head>
 
 <body>
   <h1>Running</h1>
   {{>loginButtons}}
   {{#if currentUser}}
-  {{>add}}
+    {{>add}}
   {{/if}}
   <ul class="list-group">
     {{#each posts}}
-    {{>post}}
+      {{>post}}
     {{/each}}
   </ul>
 </body>
 
-<template name="post">
-  <li class="list-group-item list-group-item-primary">
-    {{ text }} by {{ ownerUsername }}
-
-    {{#if myPost owner }}
-    <span>
-      <a href="#" class=" delete-post">delete</a>
-    </span>
-    {{/if}}
-
-    {{ #if currentUser }}
-    <form action="" class="add-coment form-group">
-      <input class="form-control" type="text" name="text" placeholder="coment...">
-    </form>
-    {{ /if }}
-
-    <ul class="list-group">
-      {{ #each myComents }}
-      <li class="list-group-item list-group-item-secondary">
-        {{ textc }} by {{ ownerUsername }}
-      </li>
-      {{ /each }}
-    </ul>
-
-  </li>
-</template>
-
-
-
 <template name="add">
   <form action="" class="add-post form-group">
-    <input class="form-control" type="text" name="text" placeholder="Posts text...">
+    <input
+      class="form-control"
+      type="text"
+      name="text"
+      placeholder="Posts text..."
+    />
   </form>
 </template>
