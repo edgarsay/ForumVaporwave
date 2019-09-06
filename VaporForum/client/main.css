@@ -2,3 +2,15 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+/*hack style
+* { background-color: rgba(255,0,0,.2); border: 1px solid black; border-collapse: collapse;}
+* * { background-color: rgba(0,255,0,.2); }
+* * * { background-color: rgba(0,0,255,.2); }
+* * * * { background-color: rgba(255,0,255,.2); }
+* * * * * { background-color: rgba(0,255,255,.2); }
+* * * * * * { background-color: rgba(255,255,0,.2); }
+* * * * * * * { background-color: rgba(255,0,0,.2); }
+* * * * * * * * { background-color: rgba(0,255,0,.2); }
+* * * * * * * * * { background-color: rgba(0,0,255,.2); }
+*/
