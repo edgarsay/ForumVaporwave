@@ -3,10 +3,9 @@ import './post.html'
 import { Comments } from "../../lib/collections/Comments.js";
 
 Template.post.helpers({
-  myPost(idv){
+  isMyPost(idv){
     return Meteor.userId() === idv;
   },
-
   myComments(){
     let id = this._id;
     return Comments.find({postId: id});

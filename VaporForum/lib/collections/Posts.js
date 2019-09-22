@@ -7,11 +7,24 @@ import{
 import{
     check 
 } from 'meteor/check';
+import{
+    Comments
+}from './Comments.js'
 
+//TODO: create a mongo schema
 export const Posts = new Mongo.Collection("posts");
 
+/*
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Meteor.publish('posts', function postsPublication() {
+    return Tasks.find();
+  });
+}
+*/
+
 Meteor.methods({
-    'posts.insert'(textv){
+    'posts.insert'(textv, threadIdv){
         check(textv, String);
 
         //check if the user's logged in
@@ -20,11 +33,11 @@ Meteor.methods({
         }
 
         Posts.insert({
-        text : textv,
-        owner : Meteor.userId(),
-        ownerUsername : Meteor.user().username,
-        //date now
-        createdAt: new Date(),
+            text : textv,
+            threadId: threadIdv,
+            owner : Meteor.userId(),
+            ownerUsername : Meteor.user().username,
+            createdAt: new Date(),
         });
     },
 
@@ -32,16 +45,18 @@ Meteor.methods({
         check(postv._id, String);
 
         //check if the user's logged in
-        if(!Meteor.userId()){
+        //if(!Meteor.userId()){
+        if(!this.userId){
             throw new Meteor.Error('not-authorized: no logged in');
         }
         //check if the user's the owner of the post
-        if(Meteor.userId() !== postv.owner){
+        //if(Meteor.userId() !== postv.owner){
+        if(this.userId !== postv.owner){
             throw new Meteor.Error('not-authorized: no the owner');
         }
 
         Posts.remove(postv._id);
-        Coments.remove({postId: postv._id});
+        Comments.remove({postId: postv._id});
     },
 
 })
