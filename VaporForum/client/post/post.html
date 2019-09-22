@@ -1,0 +1,31 @@
+<template name="post">
+  <li class="list-group-item list-group-item-primary">
+    {{ text }} by {{ ownerUsername }}
+
+    {{#if isMyPost owner }}
+    <span>
+      <a href="#" class=" delete-post">delete</a>
+    </span>
+    {{/if}}
+
+    {{ #if currentUser }}
+    <form action="" class="add-comment form-group">
+      <input
+        class="form-control"
+        type="text"
+        name="text"
+        placeholder="coment..."
+      />
+    </form>
+    {{ /if }}
+
+    <!-- COMMENTS: -->
+    <ul class="list-group">
+      {{ #each myComments }}
+      <li class="list-group-item list-group-item-secondary">
+        {{ textc }} by {{ ownerUsername }}
+      </li>
+      {{ /each }}
+    </ul>
+  </li>
+</template>

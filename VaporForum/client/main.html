@@ -1,52 +1,64 @@
 <head>
   <title>VaporForum</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 </head>
 
 <body>
-  <h1>Running</h1>
+  <h1>VaporForum</h1>
+  <!--Navbar-->
+  <nav class="navbar navbar-light navbar-1 white">
   {{>loginButtons}}
+  <!-- Collapse button -->
+  <button id="collapseButton" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+    aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation">Threads</button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent15">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      {{#each threads}}
+      <li class="nav-item active">
+        <form action="">
+          <input style="display: none" type="text" name="name" value="{{name}}">
+          <a href="#" class="select-thread nav-link">{{name}}</a>
+        </form>
+      </li>
+      {{/each}}
+    </ul>
+    <!-- Links -->
+
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+
   {{#if currentUser}}
-  {{>add}}
+  {{>newThread}}
   {{/if}}
+
   <ul class="list-group">
-    {{#each posts}}
-    {{>post}}
+    {{#each currentThread}}
+    {{>thread}}
     {{/each}}
   </ul>
+
 </body>
 
-<template name="post">
-  <li class="list-group-item list-group-item-primary">
-    {{ text }} by {{ ownerUsername }}
-
-    {{#if myPost owner }}
-    <span>
-      <a href="#" class=" delete-post">delete</a>
-    </span>
-    {{/if}}
-
-    {{ #if currentUser }}
-    <form action="" class="add-coment form-group">
-      <input class="form-control" type="text" name="text" placeholder="coment...">
-    </form>
-    {{ /if }}
-
-    <ul class="list-group">
-      {{ #each myComents }}
-      <li class="list-group-item list-group-item-secondary">
-        {{ textc }} by {{ ownerUsername }}
-      </li>
-      {{ /each }}
-    </ul>
-
-  </li>
-</template>
-
-
-
-<template name="add">
-  <form action="" class="add-post form-group">
-    <input class="form-control" type="text" name="text" placeholder="Posts text...">
+<template name="newThread">
+  <form action="" class="add-thread form-group">
+    <input class="form-control" type="text" name="name" placeholder="New Thread Name..." />
   </form>
 </template>

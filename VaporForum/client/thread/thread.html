@@ -1,0 +1,25 @@
+<template name="thread">
+  <li class="list-group-item list-group-item-danger">
+    {{name}} by {{ ownerUsername }}
+    {{#if isMyThread owner }}
+    <span>
+      <a href="#" class=" delete-thread">delete</a>
+    </span>
+    {{/if}}
+
+      {{#if currentUser}}
+        {{>add}}
+      {{/if}}
+      <ul>
+          {{#each myPosts}}
+            {{>post}}
+          {{/each}}
+      </ul>
+  </li>
+</template>
+
+<template name="add">
+  <form action="" class="add-post form-group">
+    <input class="form-control" type="text" name="text" placeholder="New Posts text..." />
+  </form>
+</template>
