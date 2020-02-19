@@ -1,2 +1,2 @@
 # ForumVaporwave
-A simple forum in a VaporWave style, made with Metoerjs
+A simple forum in a VaporWave style (at least should be 😅), made in Metoerjs
